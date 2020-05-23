@@ -30,6 +30,8 @@ func FormatError(f Formatter, s fmt.State, verb rune) {
 	)
 
 	var err error = f
+	var foundString bool
+	_, nostring := err.(NoString)
 
 	switch verb {
 	// Note that this switch must match the preference order
@@ -45,6 +47,9 @@ func FormatError(f Formatter, s fmt.State, verb rune) {
 		} else if s.Flag('+') {
 			p.printDetail = true
 			sep = "\n  - "
+			if nostring {
+				p.needNewline = true
+			}
 		}
 	case 's':
 	case 'q', 'x', 'X':
@@ -70,6 +75,9 @@ func FormatError(f Formatter, s fmt.State, verb rune) {
 
 loop:
 	for {
+		if !foundString {
+			foundString = !nostring
+		}
 		switch v := err.(type) {
 		case Formatter:
 			err = v.FormatError((*printer)(p))
@@ -83,13 +91,17 @@ loop:
 		if err == nil {
 			break
 		}
-		if p.needColon || !p.printDetail {
+		_, nostring = err.(NoString)
+		if p.needColon || !p.printDetail && !nostring && foundString {
 			p.buf.WriteByte(':')
 			p.needColon = false
 		}
-		p.buf.WriteString(sep)
+		if !nostring && foundString || p.printDetail {
+			p.buf.WriteString(sep)
+		}
 		p.inDetail = false
 		p.needNewline = false
+
 	}
 
 exit:
