@@ -19,4 +19,4 @@
 //
 // No other features of this package were included in Go 1.13, and at present
 // there are no plans to include any of them.
-package xerrors // import "golang.org/x/xerrors"
+package xerrors // import "github.com/rucciva/xerrors"

@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"testing"
 
-	"golang.org/x/xerrors"
+	"github.com/rucciva/xerrors"
 )
 
 func TestNewEqual(t *testing.T) {

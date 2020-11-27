@@ -10,8 +10,8 @@ import (
 	"math/big"
 	"testing"
 
-	"golang.org/x/xerrors"
-	"golang.org/x/xerrors/internal"
+	"github.com/rucciva/xerrors"
+	"github.com/rucciva/xerrors/internal"
 )
 
 type myType struct{}

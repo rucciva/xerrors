@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"golang.org/x/xerrors"
+	"github.com/rucciva/xerrors"
 )
 
 type tError struct{}

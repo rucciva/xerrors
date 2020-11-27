@@ -10,7 +10,7 @@ import (
 	"errors"
 	"testing"
 
-	"golang.org/x/xerrors"
+	"github.com/rucciva/xerrors"
 )
 
 func TestErrorsIs(t *testing.T) {
